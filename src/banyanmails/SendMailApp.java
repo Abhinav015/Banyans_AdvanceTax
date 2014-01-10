@@ -140,62 +140,64 @@ public class SendMailApp extends JFrame implements ActionListener, Runnable {
     }
 
     public String getTableDataForTax(BanyanDocTempBean banApp) {
-        String taxdata;
+        String taxdata="";
         taxdata = "<br>"
-                + "<table width='100%' style='font-family: Calibri;font-size:10pt;border:2px solid black;border-collapse:collapse;'>"
+                + "<table width='68%' style='font-family: Calibri;font-size:10pt;border:1px solid black;border-collapse:collapse;' cellpadding='3px'>"
+                + "<th align='left' style='border:1px solid black;font-weight:bold;font-family: Calibri;font-size:11pt;'>Description</th>"
+                + "<th align='right' style='border:1px solid black;font-weight:bold;font-family: Calibri;font-size:11pt;'>Amount (Rs)</th>"
                 + "<tr>"
-                + "<td style='border:2px solid black;font-family: Calibri;font-size:10pt;'> 1 .Short Term Capital Gain/Loss Equity </td>"
-                + "<td align='right' style='border:2px solid black;font-family: Calibri;font-size:10pt;'>" + banApp.getSht_trm_Cap_Gain_Loss_Eq() + " </td>"
+                + "<td style='border:1px solid black;font-family: Calibri;font-size:10pt;'> 1 .Short Term Capital Gain/Loss Equity </td>"
+                + "<td align='right' style='border:1px solid black;font-family: Calibri;font-size:10pt;'>" + banApp.getSht_trm_Cap_Gain_Loss_Eq() + " </td>"
                 + "</tr>"
                 + "<tr>"
-                + "<td style='border:2px solid black;font-family: Calibri;font-size:10pt;'> 2 .Short Term Capital Gain/Loss on MF </td>"
-                + "<td align='right' style='border:2px solid black;font-family: Calibri;font-size:10pt;'>" + banApp.getSht_trm_Cap_Gain_Loss_Mf() + " </td>"
+                + "<td style='border:1px solid black;font-family: Calibri;font-size:10pt;'> 2 .Short Term Capital Gain/Loss on MF </td>"
+                + "<td align='right' style='border:1px solid black;font-family: Calibri;font-size:10pt;'>" + banApp.getSht_trm_Cap_Gain_Loss_Mf()+" </td>"
                 + "</tr>"
                 + "<tr>"
-                + "<td style='border:2px solid black;font-family: Calibri;font-size:10pt;'> 3 .Short Term Capital Gain/Loss on Derivatives </td>"
-                + "<td align='right' style='border:2px solid black'>" + banApp.getSht_trm_Cap_Gain_Loss_Der() + " </td>"
+                + "<td style='border:1px solid black;font-family: Calibri;font-size:10pt;'> 3 .Short Term Capital Gain/Loss on Derivatives </td>"
+                + "<td align='right' style='border:1px solid black'>" + banApp.getSht_trm_Cap_Gain_Loss_Der() + " </td>"
                 + "</tr>"
                 + "<tr>"
-                + "<td style='border:2px solid black;font-weight:bold;font-family: Calibri;font-size:10pt;'> (A)Total Short Term Capital Gain/Loss(1+2+3) </td>"
-                + "<td align='right' style='border:2px solid black;font-weight:bold;font-family: Calibri;font-size:10pt;'>" + banApp.getTot_Short_TrmCap_Gain_Loss() + " </td>"
+                + "<td style='border:1px solid black;font-weight:bold;font-family: Calibri;font-size:10pt;'> (A)Total Short Term Capital Gain/Loss(1+2+3) </td>"
+                + "<td align='right' style='border:1px solid black;font-weight:bold;font-family: Calibri;font-size:10pt;'>" + banApp.getTot_Short_TrmCap_Gain_Loss() + " </td>"
                 + "</tr>"
                 + "<tr>"
-                + "<td style='border:2px solid black;font-family: Calibri;font-size:10pt;'> 4 .Bank Interest </td>"
-                + "<td align='right' style='border:2px solid black;font-family: Calibri;font-size:10pt;'>" + banApp.getBnk_Int() + " </td>"
+                + "<td style='border:1px solid black;font-family: Calibri;font-size:10pt;'> 4 .Bank Interest </td>"
+                + "<td align='right' style='border:1px solid black;font-family: Calibri;font-size:10pt;'>" + banApp.getBnk_Int() + " </td>"
                 + "</tr>";
 
         if (banApp.getClientStat().equalsIgnoreCase("DOMESTIC")) {
             taxdata = taxdata
                     + "<tr>"
-                    + "<td style='border:2px solid black;font-family: Calibri;font-size:10pt;'> 5 .FD Interest </td>"
-                    + "<td align='right' style='border:2px solid black;font-family: Calibri;font-size:10pt;'>" + banApp.getfDIntst() + " </td>"
+                    + "<td style='border:1px solid black;font-family: Calibri;font-size:10pt;'> 5 .FD Interest </td>"
+                    + "<td align='right' style='border:1px solid black;font-family: Calibri;font-size:10pt;'>" + banApp.getfDIntst() + " </td>"
                     + "</tr>"
                     + "<tr>"
-                    + "<td style='border:2px solid black;font-weight:bold;font-family: Calibri;font-size:10pt;'> (B)Total Interest(3+4) </td>"
-                    + "<td align='right' style='border:2px solid black;font-weight:bold;font-family: Calibri;font-size:10pt;'>" + banApp.getTotIntrst() + " </td>"
+                    + "<td style='border:1px solid black;font-weight:bold;font-family: Calibri;font-size:10pt;'> (B)Total Interest(4+5) </td>"
+                    + "<td align='right' style='border:1px solid black;font-weight:bold;font-family: Calibri;font-size:10pt;'>" + banApp.getTotIntrst() + " </td>"
                     + "</tr>"
                     + "<tr>"
-                    + "<td style='border:2px solid black;font-family: Calibri;font-size:10pt;'> 6 .TDS on FD Interest </td>"
-                    + "<td align='right' style='border:2px solid black;font-family: Calibri;font-size:10pt;'>" + banApp.getTds_FD_Interst() + " </td>"
+                    + "<td style='border:1px solid black;font-family: Calibri;font-size:10pt;'> 6 .TDS on FD Interest </td>"
+                    + "<td align='right' style='border:1px solid black;font-family: Calibri;font-size:10pt;'>" + banApp.getTds_FD_Interst() + " </td>"
                     + "</tr>";
         } else {
             taxdata = taxdata
                     + "<tr>"
-                    + "<td style='border:2px solid black;font-family: Calibri;font-size:10pt;'> 5 .TDS On Bank Interest </td>"
-                    + "<td align='right' style='border:2px solid black;font-family: Calibri;font-size:10pt;'>" + banApp.getTds_Bank_Intrst() + " </td>"
+                    + "<td style='border:1px solid black;font-family: Calibri;font-size:10pt;'> 5 .TDS On Bank Interest </td>"
+                    + "<td align='right' style='border:1px solid black;font-family: Calibri;font-size:10pt;'>" + banApp.getTds_Bank_Intrst() + " </td>"
                     + "</tr>"
                     + "<tr>"
-                    + "<td style='border:2px solid black;font-family: Calibri;font-size:10pt;'> 6 .TDS on Sale Proceeds </td>"
-                    + "<td align='right' style='border:2px solid black;font-family: Calibri;font-size:10pt;'>" + banApp.getTds_Sale_Proceeds() + " </td>"
+                    + "<td style='border:1px solid black;font-family: Calibri;font-size:10pt;'> 6 .TDS on Sale Proceeds </td>"
+                    + "<td align='right' style='border:1px solid black;font-family: Calibri;font-size:10pt;'>" + banApp.getTds_Sale_Proceeds() + " </td>"
                     + "</tr>"
                     + "<tr>"
-                    + "<td style='border:2px solid black;font-weight:bold;font-family: Calibri;font-size:10pt;'> (B)Total Tax Deducted at Source(5+6) </td>"
-                    + "<td align='right' style='border:2px solid black;font-weight:bold;font-family: Calibri;font-size:10pt;'>" + banApp.getTot_Tax_Ded_Source() + " </td>"
+                    + "<td style='border:1px solid black;font-weight:bold;font-family: Calibri;font-size:10pt;'> (B)Total Tax Deducted at Source(5+6) </td>"
+                    + "<td align='right' style='border:1px solid black;font-weight:bold;font-family: Calibri;font-size:10pt;'>" + banApp.getTot_Tax_Ded_Source() + " </td>"
                     + "</tr>";
         }
         taxdata = taxdata + "</table><br><br>";
         taxdata = taxdata + "<font face='Calibri' style='font-size:10pt;'>We have not provided Long "
-                + "Term capital gains on equity and dividend information, because as per "
+                + "Term capital gains on equity and dividend information, because as per <br>"
                 + "current tax rules, no tax is applicable on long term gains on equities "
                 + "and dividends.</font><br>";
         System.out.println(taxdata);
@@ -226,7 +228,7 @@ public class SendMailApp extends JFrame implements ActionListener, Runnable {
                         recipients[0] = emailId;
                         name = banApp.getClientName();
                         lblstatus.setText("Sending mail to " + name);
-                        String sign = "<font face='Calibri' style='font-size:10pt;color:#008000;'><b>" + tasign1.getText() + "</b></font>" + "<br><font face='Calibri' style='font-size:10pt;'>Bangalore, India.<br>M : +91-" + banApp.getMobileNo() + " </font><br>" + "<font face='Calibri' style='font-size:10pt;color:#008000;'>" + banApp.getFieldManagerEmail() + "</font>";
+                        String sign = "<font face='Calibri' style='font-size:10pt;color:#008000;'><b>" + tasign1.getText() + "</b></font>" + "<br><font face='Calibri' style='font-size:10pt;'>Bangalore, India.<br>M : +91-" + banApp.getMobileNo() + " </font><br>" + "<a href='www.banyantreeadvisors.com'><font face='Calibri' style='font-size:10pt;color:#008000;'>www.banyantreeadvisors.com</font></a>";
                         String tableData = getTableDataForTax(banApp);
 
                         SendMailAPI mailApi = new SendMailAPI();

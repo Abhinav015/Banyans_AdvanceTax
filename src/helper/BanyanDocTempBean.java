@@ -5,17 +5,17 @@ public class BanyanDocTempBean {
     private String sl;
     private String clientName;
     private String clientStat;
-    private long sht_trm_Cap_Gain_Loss_Eq;
-    private long sht_trm_Cap_Gain_Loss_Mf;
-    private long sht_trm_Cap_Gain_Loss_Der;
-    private long tot_Short_TrmCap_Gain_Loss;
-    private long bnk_Int;
-    private long fDIntst;
-    private long totIntrst;
-    private long tds_Bank_Intrst;
-    private long tds_FD_Interst;
-    private long tds_Sale_Proceeds;
-    private long tot_Tax_Ded_Source;
+    private String sht_trm_Cap_Gain_Loss_Eq;
+    private String sht_trm_Cap_Gain_Loss_Mf;
+    private String sht_trm_Cap_Gain_Loss_Der;
+    private String tot_Short_TrmCap_Gain_Loss;
+    private String bnk_Int;
+    private String fDIntst;
+    private String totIntrst;
+    private String tds_Bank_Intrst;
+    private String tds_FD_Interst;
+    private String tds_Sale_Proceeds;
+    private String tot_Tax_Ded_Source;
 
     private long bkId;
     private String emalId;
@@ -48,92 +48,100 @@ public class BanyanDocTempBean {
         this.clientStat = clientStat;
     }
 
-    public long getSht_trm_Cap_Gain_Loss_Eq() {
+    public String getSht_trm_Cap_Gain_Loss_Eq() {
         return sht_trm_Cap_Gain_Loss_Eq;
     }
 
-    public void setSht_trm_Cap_Gain_Loss_Eq(long sht_trm_Cap_Gain_Loss_Eq) {
+    public void setSht_trm_Cap_Gain_Loss_Eq(String sht_trm_Cap_Gain_Loss_Eq) {
         this.sht_trm_Cap_Gain_Loss_Eq = sht_trm_Cap_Gain_Loss_Eq;
     }
 
-    public long getSht_trm_Cap_Gain_Loss_Mf() {
+    public String getSht_trm_Cap_Gain_Loss_Mf() {
         return sht_trm_Cap_Gain_Loss_Mf;
     }
 
-    public void setSht_trm_Cap_Gain_Loss_Mf(long sht_trm_Cap_Gain_Loss_Mf) {
+    public void setSht_trm_Cap_Gain_Loss_Mf(String sht_trm_Cap_Gain_Loss_Mf) {
         this.sht_trm_Cap_Gain_Loss_Mf = sht_trm_Cap_Gain_Loss_Mf;
     }
 
-    public long getSht_trm_Cap_Gain_Loss_Der() {
+    public String getSht_trm_Cap_Gain_Loss_Der() {
         return sht_trm_Cap_Gain_Loss_Der;
     }
 
-    public void setSht_trm_Cap_Gain_Loss_Der(long sht_trm_Cap_Gain_Loss_Der) {
+    public void setSht_trm_Cap_Gain_Loss_Der(String sht_trm_Cap_Gain_Loss_Der) {
         this.sht_trm_Cap_Gain_Loss_Der = sht_trm_Cap_Gain_Loss_Der;
     }
 
-    public long getTot_Short_TrmCap_Gain_Loss() {
+    public String getTot_Short_TrmCap_Gain_Loss() {
         return tot_Short_TrmCap_Gain_Loss;
     }
 
-    public void setTot_Short_TrmCap_Gain_Loss(long tot_Short_TrmCap_Gain_Loss) {
+    public void setTot_Short_TrmCap_Gain_Loss(String tot_Short_TrmCap_Gain_Loss) {
         this.tot_Short_TrmCap_Gain_Loss = tot_Short_TrmCap_Gain_Loss;
     }
 
-    public long getBnk_Int() {
+    public String getBnk_Int() {
         return bnk_Int;
     }
 
-    public void setBnk_Int(long bnk_Int) {
+    public void setBnk_Int(String bnk_Int) {
         this.bnk_Int = bnk_Int;
     }
 
-    public long getfDIntst() {
+    public String getfDIntst() {
         return fDIntst;
     }
 
-    public void setfDIntst(long fDIntst) {
+    public void setfDIntst(String fDIntst) {
         this.fDIntst = fDIntst;
     }
 
-    public long getTotIntrst() {
+    public String getTotIntrst() {
         return totIntrst;
     }
 
-    public void setTotIntrst(long totIntrst) {
+    public void setTotIntrst(String totIntrst) {
         this.totIntrst = totIntrst;
     }
 
-    public long getTds_Bank_Intrst() {
+    public String getTds_Bank_Intrst() {
         return tds_Bank_Intrst;
     }
 
-    public void setTds_Bank_Intrst(long tds_Bank_Intrst) {
+    public void setTds_Bank_Intrst(String tds_Bank_Intrst) {
         this.tds_Bank_Intrst = tds_Bank_Intrst;
     }
 
-    public long getTds_FD_Interst() {
+    public String getTds_FD_Interst() {
         return tds_FD_Interst;
     }
 
-    public void setTds_FD_Interst(long tds_FD_Interst) {
+    public void setTds_FD_Interst(String tds_FD_Interst) {
         this.tds_FD_Interst = tds_FD_Interst;
     }
 
-    public long getTds_Sale_Proceeds() {
+    public String getTds_Sale_Proceeds() {
         return tds_Sale_Proceeds;
     }
 
-    public void setTds_Sale_Proceeds(long tds_Sale_Proceeds) {
+    public void setTds_Sale_Proceeds(String tds_Sale_Proceeds) {
         this.tds_Sale_Proceeds = tds_Sale_Proceeds;
     }
 
-    public long getTot_Tax_Ded_Source() {
+    public String getTot_Tax_Ded_Source() {
         return tot_Tax_Ded_Source;
     }
 
-    public void setTot_Tax_Ded_Source(long tot_Tax_Ded_Source) {
+    public void setTot_Tax_Ded_Source(String tot_Tax_Ded_Source) {
         this.tot_Tax_Ded_Source = tot_Tax_Ded_Source;
+    }
+
+    public long getBkId() {
+        return bkId;
+    }
+
+    public void setBkId(long bkId) {
+        this.bkId = bkId;
     }
 
     public String getEmalId() {
@@ -176,14 +184,6 @@ public class BanyanDocTempBean {
         this.mobileNo = mobileNo;
     }
 
-    public long getBkId() {
-        return bkId;
-    }
-
-    public void setBkId(long bkId) {
-        this.bkId = bkId;
-    }
     
     
-
 }

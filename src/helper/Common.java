@@ -7,12 +7,15 @@ package helper;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -24,6 +27,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class Common {
 
+    ReadHtmlFile rhf=new ReadHtmlFile();
+    
     private static String GetFileExtension(String fname2) {
         String fileName = fname2;
         String fname = "";
@@ -252,52 +257,66 @@ public class Common {
 
                     BanyanDocTempBean tempBean = new BanyanDocTempBean();
                     System.out.println("Getting information for doc templete excel ...........");
-
+                    row.getCell(0).setCellType((Cell.CELL_TYPE_STRING));
+                    row.getCell(1).setCellType((Cell.CELL_TYPE_STRING));
+                    row.getCell(2).setCellType((Cell.CELL_TYPE_STRING));
+                    row.getCell(3).setCellType((Cell.CELL_TYPE_STRING));
+                    row.getCell(4).setCellType((Cell.CELL_TYPE_STRING));
+                    row.getCell(5).setCellType((Cell.CELL_TYPE_STRING));
+                    row.getCell(6).setCellType((Cell.CELL_TYPE_STRING));
+                    row.getCell(7).setCellType((Cell.CELL_TYPE_STRING));
+                    row.getCell(8).setCellType((Cell.CELL_TYPE_STRING));
+                    row.getCell(9).setCellType((Cell.CELL_TYPE_STRING));
+                    row.getCell(10).setCellType((Cell.CELL_TYPE_STRING));
+                    row.getCell(11).setCellType((Cell.CELL_TYPE_STRING));
+                    row.getCell(12).setCellType((Cell.CELL_TYPE_STRING));
+                    row.getCell(13).setCellType((Cell.CELL_TYPE_STRING));
+                    String bkId=itr.next().toString().trim();
+                    HashMap data=rhf.getDataFromHtml(bkId.toString().trim());
+                    
+                    
                     tempBean.setSl(row.getCell(0).toString().trim());
                     System.out.println("Sl===>" + tempBean.getSl());
                     tempBean.setClientName(row.getCell(1).toString().trim());
                     System.out.println("ClientName===>" + tempBean.getClientName());
                     tempBean.setClientStat(row.getCell(2).toString().trim());
                     System.out.println("ClientStat===>" + tempBean.getClientStat());
-                    tempBean.setSht_trm_Cap_Gain_Loss_Eq((long) row.getCell(3).getNumericCellValue());
+                    tempBean.setSht_trm_Cap_Gain_Loss_Eq(getFormatedAmount(row.getCell(3).toString().trim()));
                     System.out.println("Sht_trm_Cap_Gain_Loss_Eq===>" + tempBean.getSht_trm_Cap_Gain_Loss_Eq());
-                    tempBean.setSht_trm_Cap_Gain_Loss_Mf((long) row.getCell(4).getNumericCellValue());
+                    tempBean.setSht_trm_Cap_Gain_Loss_Mf(getFormatedAmount(row.getCell(4).toString().trim()));
                     System.out.println("Sht_trm_Cap_Gain_Loss_Mf===>" + tempBean.getSht_trm_Cap_Gain_Loss_Mf());
-                    tempBean.setSht_trm_Cap_Gain_Loss_Der((long) row.getCell(5).getNumericCellValue());
+                    tempBean.setSht_trm_Cap_Gain_Loss_Der(getFormatedAmount(row.getCell(5).toString().trim()));
                     System.out.println("Sht_trm_Cap_Gain_Loss_Der===>" + tempBean.getSht_trm_Cap_Gain_Loss_Der());
-                    tempBean.setTot_Short_TrmCap_Gain_Loss((long) row.getCell(6).getNumericCellValue());
+                    String tot_Short_TrmCap_Gain_Loss=String.valueOf(Double.parseDouble(row.getCell(3).toString().trim())+Double.parseDouble(row.getCell(4).toString().trim())+Double.parseDouble(row.getCell(5).toString().trim()));
+                    tempBean.setTot_Short_TrmCap_Gain_Loss(getFormatedAmount(tot_Short_TrmCap_Gain_Loss));
                     System.out.println("Tot_Short_TrmCap_Gain_Loss===>" + tempBean.getTot_Short_TrmCap_Gain_Loss());
-                    tempBean.setBnk_Int((long) row.getCell(7).getNumericCellValue());
+                    tempBean.setBnk_Int(getFormatedAmount(row.getCell(7).toString().trim()));
                     System.out.println("Bnk_Int===>" + tempBean.getBnk_Int());
-                    tempBean.setfDIntst((long) row.getCell(8).getNumericCellValue());
+                    tempBean.setfDIntst(getFormatedAmount(data.get("totIntEarned").toString().trim()));
                     System.out.println("fDIntst===>" + tempBean.getfDIntst());
-                    tempBean.setTotIntrst((long) tempBean.getBnk_Int() + tempBean.getfDIntst());
+                    String totIntrst = String.valueOf(Long.valueOf(row.getCell(7).toString().trim()) + Long.valueOf(Math.round((double)data.get("totIntEarned"))));
+                    tempBean.setTotIntrst(getFormatedAmount(totIntrst));
                     System.out.println("TotIntrst===>" + tempBean.getTotIntrst());
-                    tempBean.setTds_Bank_Intrst((long) row.getCell(10).getNumericCellValue());
+                    tempBean.setTds_Bank_Intrst(getFormatedAmount(row.getCell(10).toString().trim()));
                     System.out.println("Tds_Bank_Intrst===>" + tempBean.getTds_Bank_Intrst());
-                    tempBean.setTds_FD_Interst((long) row.getCell(11).getNumericCellValue());
+                    tempBean.setTds_FD_Interst(getFormatedAmount(data.get("totTaxDed").toString().trim()));
                     System.out.println("Tds_FD_Interst===>" + tempBean.getTds_FD_Interst());
-                    tempBean.setTds_Sale_Proceeds((long) row.getCell(12).getNumericCellValue());
+                    tempBean.setTds_Sale_Proceeds(getFormatedAmount(row.getCell(12).toString().trim()));
                     System.out.println("Tds_Sale_Proceeds===>" + tempBean.getTds_Sale_Proceeds());
                     if (tempBean.getClientStat().equals("DOMESTIC")) {
                         tempBean.setTot_Tax_Ded_Source(tempBean.getTds_FD_Interst());
                     } else {
-                        tempBean.setTot_Tax_Ded_Source(tempBean.getTds_Bank_Intrst() + tempBean.getTds_Sale_Proceeds());
+                        String tot_Tax_Ded_Source = String.valueOf(Long.valueOf(row.getCell(10).toString().trim()) + Long.valueOf(row.getCell(12).toString().trim()));
+                        tempBean.setTot_Tax_Ded_Source(getFormatedAmount(tot_Tax_Ded_Source));
                     }
                     System.out.println("Tot_Tax_Ded_Source===>" + tempBean.getTot_Tax_Ded_Source());
 
-                    tempBean.setBkId((long) itr.next());
-                    System.out.println("BkId===>" + tempBean.getBkId());
+                    tempBean.setBkId(Long.valueOf(bkId));
                     tempBean.setFieldManager(itr.next().toString().trim());
-                    System.out.println("FieldManager===>" + tempBean.getFieldManager());
                     tempBean.setSalutation(itr.next().toString().trim());
-                    System.out.println("Salutation===>" + tempBean.getSalutation());
                     tempBean.setEmalId(itr.next().toString().trim());
-                    System.out.println("EmalId===>" + tempBean.getEmalId());
                     tempBean.setFieldManagerEmail(itr.next().toString().trim());
-                    System.out.println("FieldManagerEmail===>" + tempBean.getFieldManagerEmail());
                     tempBean.setMobileNo((long) itr.next());
-                    System.out.println("MobileNo===>" + tempBean.getMobileNo());
                     System.out.println("****************************************************************************************\n\n\n");
                     lst.add(tempBean);
 
@@ -314,5 +333,33 @@ public class Common {
         }
 
         return Hm;
+    }
+
+    public String getFormatedAmount(String amt) {
+        try {
+            if (amt.equals("0")) {
+                amt = "-";
+            } else if (amt.equals("0.0")) {
+                amt = "-";
+            } else if (Long.valueOf(amt) < 0) {
+                amt = "-" + Math.abs(Long.valueOf(amt));
+            } else {
+                long amnt = Long.parseLong(amt);
+                NumberFormat numberFormatter = NumberFormat.getNumberInstance(new Locale("EN", "IN"));
+                amt = numberFormatter.format(amnt);
+            }
+
+        } catch (NumberFormatException ex) {
+            if (Double.valueOf(amt).longValue() < 0) {
+                NumberFormat numberFormatter = NumberFormat.getNumberInstance(new Locale("EN", "IN"));
+                amt ="-"+numberFormatter.format((long) Math.abs(Math.round(Double.valueOf(amt))));
+            }else{
+                 NumberFormat numberFormatter = NumberFormat.getNumberInstance(new Locale("EN", "IN"));
+                 amt =numberFormatter.format((long) Math.abs(Math.round(Double.valueOf(amt))));
+            }
+
+        }
+
+        return amt;
     }
 }
