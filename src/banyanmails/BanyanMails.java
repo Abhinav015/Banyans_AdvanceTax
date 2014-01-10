@@ -1,5 +1,6 @@
 package banyanmails;
 
+import java.awt.ComponentOrientation;
 import java.awt.event.WindowAdapter;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -43,6 +44,7 @@ public class BanyanMails extends WindowAdapter {
         frm1.setSize(600, 280);
         frm1.setVisible(true);
         frm1.setButtonDisbled();
+        frm1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         frm1.setData(sc.getFlDocTemp(), sc.getFlClients());
         return frm1;
     }

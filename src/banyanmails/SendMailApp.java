@@ -200,7 +200,6 @@ public class SendMailApp extends JFrame implements ActionListener, Runnable {
                 + "Term capital gains on equity and dividend information, because as per <br>"
                 + "current tax rules, no tax is applicable on long term gains on equities "
                 + "and dividends.</font><br>";
-        System.out.println(taxdata);
         return taxdata;
     }
 

@@ -31,8 +31,8 @@ public class Logger {
     public void clearLogs() {
         try {
             String data = "Banyan Tree Advisors - Client Mail Application Logs";
-            File file = new File("BanyanMailLogs.log");
-
+            File file = new File("AdvanceTaxLogs.log");
+            System.out.println(file.getAbsoluteFile());
             if (!file.exists()) {
                 file.createNewFile();
             }
@@ -45,7 +45,6 @@ public class Logger {
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
         }
 
     }
@@ -66,7 +65,6 @@ public class Logger {
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
