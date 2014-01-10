@@ -1,17 +1,15 @@
-
-
 package helper;
 
-
 public class BanyanClientsBean {
+
     private String sno;
     private long banId;
     private String name;
-    private String fieldManager;	
+    private String fieldManager;
     private String salutation;
     private String email;
     private String fmEmailId;
-    private Boolean chk; 
+    private Boolean chk;
     private long mobNo;
 
     public String getSno() {
@@ -85,7 +83,5 @@ public class BanyanClientsBean {
     public void setMobNo(long mobNo) {
         this.mobNo = mobNo;
     }
-            
-   
-    
+
 }

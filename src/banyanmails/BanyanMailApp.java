@@ -151,16 +151,19 @@ public class BanyanMailApp extends JFrame implements ActionListener {
             if (tf1.getText().equals("") || tf1.getText() == null || tf2.getText().equals("") || tf2.getText() == null) {
                 JOptionPane.showMessageDialog(null, "Please select attachments folder path and client file(xlsx or xls).");
             } else {
-
-                sc.setFlDocTemp(getFlDocTemp() == null ? tf1.getText() : getFlDocTemp());
-                sc.setFlClients(getFlClients() == null ? tf2.getText() : getFlClients());
-                sc.init();
-                sc.setIconImage(new javax.swing.ImageIcon("tree.png").getImage());
-                sc.setLocation(350, 200);
-                sc.setSize(600, 350);
-                sc.setVisible(true);
-                sc.setResizable(false);
-                this.dispose();
+                try {
+                    sc.setFlDocTemp(getFlDocTemp() == null ? tf1.getText() : getFlDocTemp());
+                    sc.setFlClients(getFlClients() == null ? tf2.getText() : getFlClients());
+                    sc.init();
+                    sc.setIconImage(new javax.swing.ImageIcon("tree.png").getImage());
+                    sc.setLocation(350, 200);
+                    sc.setSize(600, 350);
+                    sc.setVisible(true);
+                    sc.setResizable(false);
+                    this.dispose();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "You have selected wrong client CSV/XLS file.");
+                }
             }
         }
 

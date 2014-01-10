@@ -5,13 +5,13 @@ import javax.swing.JFrame;
 import javax.swing.UIManager;
 
 public class BanyanMails extends WindowAdapter {
-    
+
     public static void main(String[] args) {
         frmShow();
     }
 
     public static JFrame frmShow() {
-       
+
         JFrame.setDefaultLookAndFeelDecorated(true);
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
@@ -27,9 +27,9 @@ public class BanyanMails extends WindowAdapter {
         frm1.setButtonDisbled();
         return frm1;
     }
-    
+
     public static JFrame frmShow(SelectClients sc) {
-       
+
         JFrame.setDefaultLookAndFeelDecorated(true);
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");

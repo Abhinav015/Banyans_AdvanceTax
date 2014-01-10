@@ -140,7 +140,7 @@ public class SendMailApp extends JFrame implements ActionListener, Runnable {
     }
 
     public String getTableDataForTax(BanyanDocTempBean banApp) {
-        String taxdata="";
+        String taxdata = "";
         taxdata = "<br>"
                 + "<table width='68%' style='font-family: Calibri;font-size:10pt;border:1px solid black;border-collapse:collapse;' cellpadding='3px'>"
                 + "<th align='left' style='border:1px solid black;font-weight:bold;font-family: Calibri;font-size:11pt;'>Description</th>"
@@ -151,7 +151,7 @@ public class SendMailApp extends JFrame implements ActionListener, Runnable {
                 + "</tr>"
                 + "<tr>"
                 + "<td style='border:1px solid black;font-family: Calibri;font-size:10pt;'> 2 .Short Term Capital Gain/Loss on MF </td>"
-                + "<td align='right' style='border:1px solid black;font-family: Calibri;font-size:10pt;'>" + banApp.getSht_trm_Cap_Gain_Loss_Mf()+" </td>"
+                + "<td align='right' style='border:1px solid black;font-family: Calibri;font-size:10pt;'>" + banApp.getSht_trm_Cap_Gain_Loss_Mf() + " </td>"
                 + "</tr>"
                 + "<tr>"
                 + "<td style='border:1px solid black;font-family: Calibri;font-size:10pt;'> 3 .Short Term Capital Gain/Loss on Derivatives </td>"

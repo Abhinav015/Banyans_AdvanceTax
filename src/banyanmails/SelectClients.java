@@ -37,64 +37,55 @@ public class SelectClients extends JFrame implements ActionListener {
         super(str);
     }
 
-    public void init() {
+    public void init() throws IOException {
 
-        try {
-            String[] colHeads = {"Sno", "Bank Customer Id", "Name", "Email", "Select"};
-            HashMap hm;
-            try {
-                hm = cmn.getImportExcelData(getFlClients());
-                int cols = 5;
-                ArrayList<BanyanClientsBean> ls = (ArrayList) hm.get("list");
-                int noRec = ls.size();
-                List data = (ArrayList) hm.get("data");
-                Iterator itr = data.iterator();
-                Object[][] tableData = new Object[noRec][cols];
-                int i = 0;
-                while (itr.hasNext()) {
-                    for (int j = 1; j <= cols; j++) {
-                        tableData[i][j - 1] = itr.next();
-                    }
-                    i++;
-                }
-                b1 = new JButton("Select All");
-                b2 = new JButton("Clear All");
-                b3 = new JButton("Ok");
-                b4 = new JButton("Cancel");
-
-                b1.setBounds(40, 270, 100, 27);
-                b2.setBounds(180, 270, 100, 27);
-                b3.setBounds(320, 270, 100, 27);
-                b4.setBounds(460, 270, 100, 27);
-
-                model = new MyTableModel(tableData, colHeads);
-                table = new JTable(model);
-                table.getColumnModel().getColumn(0).setPreferredWidth(10);
-                JScrollPane tableScroller = new JScrollPane(table);
-                tableScroller.setBounds(2, 10, 593, 250);
-                Container cp = getContentPane();
-                cp.add(tableScroller);
-                cp.add(b1);
-                cp.add(b2);
-                cp.add(b3);
-                cp.add(b4);
-
-                b1.addActionListener(this);
-                b2.addActionListener(this);
-                b3.addActionListener(this);
-                b4.addActionListener(this);
-                addWindowListener(new MyWindowAdapter1(this));
-                setLayout(null);
-
-                table.setRowHeight(22);
-
-            } catch (IOException ex) {
-                Logger.getLogger(SelectClients.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println("Exception in select clients");
+        String[] colHeads = {"Sno", "Bank Customer Id", "Name", "Email", "Select"};
+        HashMap hm;
+        hm = cmn.getImportExcelData(getFlClients());
+        int cols = 5;
+        ArrayList<BanyanClientsBean> ls = (ArrayList) hm.get("list");
+        int noRec = ls.size();
+        List data = (ArrayList) hm.get("data");
+        Iterator itr = data.iterator();
+        Object[][] tableData = new Object[noRec][cols];
+        int i = 0;
+        while (itr.hasNext()) {
+            for (int j = 1; j <= cols; j++) {
+                tableData[i][j - 1] = itr.next();
             }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "You have selected wrong client CSV/XLS file.");
+            i++;
         }
+        b1 = new JButton("Select All");
+        b2 = new JButton("Clear All");
+        b3 = new JButton("Ok");
+        b4 = new JButton("Cancel");
+
+        b1.setBounds(40, 270, 100, 27);
+        b2.setBounds(180, 270, 100, 27);
+        b3.setBounds(320, 270, 100, 27);
+        b4.setBounds(460, 270, 100, 27);
+
+        model = new MyTableModel(tableData, colHeads);
+        table = new JTable(model);
+        table.getColumnModel().getColumn(0).setPreferredWidth(10);
+        JScrollPane tableScroller = new JScrollPane(table);
+        tableScroller.setBounds(2, 10, 593, 250);
+        Container cp = getContentPane();
+        cp.add(tableScroller);
+        cp.add(b1);
+        cp.add(b2);
+        cp.add(b3);
+        cp.add(b4);
+
+        b1.addActionListener(this);
+        b2.addActionListener(this);
+        b3.addActionListener(this);
+        b4.addActionListener(this);
+        addWindowListener(new MyWindowAdapter1(this));
+        setLayout(null);
+
+        table.setRowHeight(22);
+
     }
 
     @Override
@@ -129,8 +120,8 @@ public class SelectClients extends JFrame implements ActionListener {
         }
 
         if (e.getActionCommand().equals("Cancel")) {
-                this.setVisible(false);
-                BanyanMails.frmShow(this);
+            this.setVisible(false);
+            BanyanMails.frmShow(this);
         }
     }
 
@@ -149,22 +140,20 @@ public class SelectClients extends JFrame implements ActionListener {
     public void setFlDocTemp(String flDocTemp) {
         this.flDocTemp = flDocTemp;
     }
-    
-    
-    
+
     class MyWindowAdapter1 extends WindowAdapter {
 
-    SelectClients sc = null;
+        SelectClients sc = null;
 
-    MyWindowAdapter1(SelectClients sc) {
-        this.sc = sc;
+        MyWindowAdapter1(SelectClients sc) {
+            this.sc = sc;
+        }
+
+        public void windowClosing(WindowEvent e) {
+            sc.setVisible(false);
+            BanyanMails.frmShow(sc);
+        }
+
     }
-
-    public void windowClosing(WindowEvent e) {
-        sc.setVisible(false);
-        BanyanMails.frmShow(sc);
-    }
-
-}
 
 }

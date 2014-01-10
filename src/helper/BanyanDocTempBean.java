@@ -184,6 +184,4 @@ public class BanyanDocTempBean {
         this.mobileNo = mobileNo;
     }
 
-    
-    
 }
