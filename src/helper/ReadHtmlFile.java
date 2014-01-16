@@ -1,19 +1,23 @@
 package helper;
 
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import javax.swing.JLabel;
 
 public class ReadHtmlFile {
 
     private double totIntEarned = 0d, totTaxDed = 0d;
 
-    public HashMap getDataFromHtml(String bk_Cust_ID) {
+    public HashMap getDataFromHtml(String bk_Cust_ID, JLabel lblstatus) {
         HashMap hm = new HashMap();
         try {
-            File file = new File("d://htmlFile//" + bk_Cust_ID + ".html");
+            bk_Cust_ID = bk_Cust_ID.replaceAll(" ", "").trim();
+            File file = new File("d://htmlFile//" + bk_Cust_ID.trim() + ".html");
+
             FileReader fileReader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line;
@@ -28,11 +32,9 @@ public class ReadHtmlFile {
                 }
             }
             fileReader.close();
-            System.out.println("Total Interest earned==>" + totIntEarned);
-            System.out.println("Total Tax deducted==>" + totTaxDed);
         } catch (IOException e) {
-            hm.put("totIntEarned", 0);
-            hm.put("totTaxDed", 0);
+            lblstatus.setForeground(Color.RED);
+            lblstatus.setText("[HTML-FILE MISSING]File or Folder(d:/htmlFile) not found. Bank Customer ID -" + bk_Cust_ID.trim());
         }
         return hm;
     }

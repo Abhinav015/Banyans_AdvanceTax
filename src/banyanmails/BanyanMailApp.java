@@ -2,6 +2,7 @@ package banyanmails;
 
 import helper.MyTableModel;
 import helper.DatePicker;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,8 +16,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class BanyanMailApp extends JFrame implements ActionListener {
+public class BanyanMailApp extends JFrame implements ActionListener, Runnable {
 
+    Thread showClient;
     JButton b1, b2, b3, b4, b5, jbutton;
     private JLabel l1, l2, l3, jlabel;
     private JTextField tf1, tf2, jdate;
@@ -39,7 +41,9 @@ public class BanyanMailApp extends JFrame implements ActionListener {
         l3 = new JLabel("Date of Report", JLabel.LEFT);
 
         tf1 = new JTextField(40);
+        tf1.setBackground(Color.decode("#FFFFE0"));
         tf2 = new JTextField(40);
+        tf2.setBackground(Color.decode("#FFFFE0"));
         b1 = new JButton("Send");
         b2 = new JButton("...");
         b3 = new JButton("...");
@@ -48,6 +52,7 @@ public class BanyanMailApp extends JFrame implements ActionListener {
 
         jlabel = new JLabel("Report Date ");
         jdate = new JTextField(40);
+        jdate.setBackground(Color.decode("#FFFFE0"));
         jbutton = new JButton(dt);
 
         l1.setBounds(10, 50, 200, 30);
@@ -84,7 +89,6 @@ public class BanyanMailApp extends JFrame implements ActionListener {
         b5.addActionListener(this);
         jbutton.addActionListener(this);
         setLayout(null);
-        b1.setEnabled(false);
     }
 
     @Override
@@ -142,6 +146,7 @@ public class BanyanMailApp extends JFrame implements ActionListener {
                 setFlClients(chooser.getSelectedFile().toString());
                 System.out.println("getCurrentDirectory(): " + chooser.getCurrentDirectory());
                 System.out.println("getSelectedFile() : " + chooser.getSelectedFile());
+                b4.setEnabled(true);
             } else {
                 System.out.println("No Selection");
             }
@@ -151,19 +156,8 @@ public class BanyanMailApp extends JFrame implements ActionListener {
             if (tf1.getText().equals("") || tf1.getText() == null || tf2.getText().equals("") || tf2.getText() == null) {
                 JOptionPane.showMessageDialog(null, "Please select attachments folder path and client file(xlsx or xls).");
             } else {
-                try {
-                    sc.setFlDocTemp(getFlDocTemp() == null ? tf1.getText() : getFlDocTemp());
-                    sc.setFlClients(getFlClients() == null ? tf2.getText() : getFlClients());
-                    sc.init();
-                    sc.setIconImage(new javax.swing.ImageIcon("tree.png").getImage());
-                    sc.setLocation(350, 200);
-                    sc.setSize(600, 350);
-                    sc.setVisible(true);
-                    sc.setResizable(false);
-                    this.dispose();
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "You have selected wrong client CSV/XLS file.");
-                }
+                showClient = new Thread(this);
+                showClient.start();
             }
         }
 
@@ -188,9 +182,15 @@ public class BanyanMailApp extends JFrame implements ActionListener {
         tf1.setText(flDoc);
         tf2.setText(flCl);
         b1.setEnabled(true);
+        b4.setEnabled(true);
     }
 
     public void setButtonDisbled() {
+        b1.setEnabled(false);
+        b4.setEnabled(false);
+    }
+
+    public void setButtonDisbled1() {
         b1.setEnabled(false);
     }
 
@@ -208,6 +208,23 @@ public class BanyanMailApp extends JFrame implements ActionListener {
 
     public void setFlDocTemp(String flDocTemp) {
         this.flDocTemp = flDocTemp;
+    }
+
+    @Override
+    public void run() {
+        try {
+            sc.setFlDocTemp(getFlDocTemp() == null ? tf1.getText() : getFlDocTemp());
+            sc.setFlClients(getFlClients() == null ? tf2.getText() : getFlClients());
+            sc.init();
+            sc.setIconImage(new javax.swing.ImageIcon("tree.png").getImage());
+            sc.setLocation(350, 200);
+            sc.setSize(600, 350);
+            sc.setVisible(true);
+            sc.setResizable(false);
+            this.dispose();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "You have selected wrong client CSV/XLS file.");
+        }
     }
 
 }

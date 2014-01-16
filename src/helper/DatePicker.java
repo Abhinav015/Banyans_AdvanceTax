@@ -8,8 +8,7 @@ public class DatePicker {
 
     int month = java.util.Calendar.getInstance().get(java.util.Calendar.MONTH);
     int year = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
-    ;
-        JLabel l = new JLabel("", JLabel.CENTER);
+    JLabel l = new JLabel("", JLabel.CENTER);
     String day = "";
     JDialog d;
     JButton[] button = new JButton[49];

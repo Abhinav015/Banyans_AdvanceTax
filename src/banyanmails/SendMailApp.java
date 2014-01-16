@@ -4,13 +4,13 @@ import helper.BanyanDocTempBean;
 import helper.Common;
 import helper.MyTableModel;
 import helper.SendMailAPI;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -58,12 +58,23 @@ public class SendMailApp extends JFrame implements ActionListener, Runnable {
         lblstatus = new JLabel("Status", JLabel.LEFT);
 
         tfsub = new JTextField(40);
+        tfsub.setBackground(Color.decode("#FFFFE0"));
         tfuname = new JTextField(40);
+        tfuname.setBackground(Color.decode("#FFFFE0"));
         tfpname = new JPasswordField(40);
+        tfpname.setBackground(Color.decode("#FFFFE0"));
         email = new JButton("Email", mail);
+        
+        
         tabody = new JTextArea(40, 60);
+        tabody.setBackground(Color.decode("#FFFFE0"));
+        tabody.setLineWrap(true);
+        tabody.setWrapStyleWord(true);
+        
         tasign1 = new JTextField(40);
+        tasign1.setBackground(Color.decode("#FFFFE0"));
         tasign2 = new JTextArea(10, 30);
+        tasign2.setBackground(Color.decode("#FFFFE0"));
 
         pb = new JProgressBar();
         pb.setValue(0);
@@ -84,7 +95,7 @@ public class SendMailApp extends JFrame implements ActionListener, Runnable {
         lblsign.setBounds(10, 170, 160, 30);
         lbluname.setBounds(10, 285, 160, 30);
         lblpname.setBounds(10, 330, 160, 30);
-        lblstatus.setBounds(90, 396, 400, 30);
+        lblstatus.setBounds(90, 396, 430, 30);
 
         tfsub.setBounds(90, 20, 450, 27);
         tfuname.setBounds(90, 285, 220, 27);
@@ -95,7 +106,7 @@ public class SendMailApp extends JFrame implements ActionListener, Runnable {
         email.setBounds(180, 430, 100, 30);
         close.setBounds(330, 430, 100, 30);
         pb.setBounds(90, 370, 450, 25);
-
+        lblstatus.setForeground(Color.BLACK);
         Container cp = getContentPane();
         cp.add(lblsub);
         cp.add(lblbody);
@@ -133,7 +144,6 @@ public class SendMailApp extends JFrame implements ActionListener, Runnable {
                 load.start();
             }
         }
-
         if (ae.getSource() == close) {
             System.exit(1);
         }
@@ -207,19 +217,20 @@ public class SendMailApp extends JFrame implements ActionListener, Runnable {
     public void run() {
         try {
             Common cmn = new Common();
-            HashMap hm = cmn.getImportExcelData1(getFlDocTemp(), getFlClients());
+            HashMap hm = cmn.getImportExcelData1(getFlDocTemp(), getFlClients(), lblstatus);
             try {
 
-                ArrayList<BanyanDocTempBean> ls = (ArrayList) hm.get("list");
-                int noRec = ls.size();
+                HashMap clientDet = (HashMap) hm.get("clientDet");
+                int noRec = clientDet.size();
                 pb.setMinimum(0);
                 pb.setMaximum(getDataCheckedLen(getModel()));
                 int flag = 0;
                 log.clearLogs();
                 lblstatus.setText("initializing...");
                 for (int i = 0; i < noRec; i++) {
-                    BanyanDocTempBean banApp = (BanyanDocTempBean) ls.get(i);
-                    if (getModel().getValueAt(i, 2).toString().equalsIgnoreCase(banApp.getClientName())
+                    BanyanDocTempBean banApp = (BanyanDocTempBean) clientDet.get(getModel().getValueAt(i, 2).toString().trim().replaceAll(" ", ""));
+
+                    if (getModel().getValueAt(i, 2).toString().replaceAll(" ", "").equalsIgnoreCase(banApp.getClientName().replaceAll(" ", ""))
                             && getModel().getValueAt(i, 4).toString().equals("true")) {
                         emailId = banApp.getEmalId();
                         salutation = banApp.getSalutation();
@@ -251,6 +262,7 @@ public class SendMailApp extends JFrame implements ActionListener, Runnable {
 
                         } catch (Exception ex) {
                             flag++;
+                            ex.printStackTrace();
                             log.errorLogger(ex);
                             lblstatus.setText("Mail sending failed to " + name);
                             data = "# [FAILED] " + new Date() + "  Id-" + banApp.getBkId() + "    Name-" + name + "       Email-" + emailId;

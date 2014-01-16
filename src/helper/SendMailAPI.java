@@ -28,10 +28,10 @@ public class SendMailAPI {
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", HOST_NAME);
         props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.timeout", "30000");
 
         Authenticator authenticator = new SMTPAuthenticator(from, emailPassword);
         Session session = Session.getDefaultInstance(props, authenticator);
-
         session.setDebug(debug);
 
         Message msg = new MimeMessage(session);
@@ -45,8 +45,7 @@ public class SendMailAPI {
         }
         msg.setRecipients(Message.RecipientType.TO, addressTo);
 
-        // Setting the Subject and Content Type
-        message = "<font face='Calibri' style='font-size:10pt;'>" + salutation + ", <br><br>" + message + "<br>" + taxDataTabular + "<br><br>Regards<br><br>" + manager + "<br>" + "<br></font>";
+        message = "<font face='Calibri' style='font-size:10pt;'>" + salutation + ", <br><br>" + message + "<br>" + taxDataTabular + "<br><br>Regards<br>" + manager + "<br>" + "<br></font>";
         String details = sign;
         message = message + details;
         msg.setSubject(subject);

@@ -3,7 +3,7 @@ package helper;
 public class BanyanClientsBean {
 
     private String sno;
-    private long banId;
+    private String banId;
     private String name;
     private String fieldManager;
     private String salutation;
@@ -20,11 +20,11 @@ public class BanyanClientsBean {
         this.sno = sno;
     }
 
-    public long getBanId() {
+    public String getBanId() {
         return banId;
     }
 
-    public void setBanId(long banId) {
+    public void setBanId(String banId) {
         this.banId = banId;
     }
 

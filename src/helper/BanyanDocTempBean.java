@@ -17,7 +17,7 @@ public class BanyanDocTempBean {
     private String tds_Sale_Proceeds;
     private String tot_Tax_Ded_Source;
 
-    private long bkId;
+    private String bkId;
     private String emalId;
     private String salutation;
     private String fieldManager;
@@ -136,11 +136,11 @@ public class BanyanDocTempBean {
         this.tot_Tax_Ded_Source = tot_Tax_Ded_Source;
     }
 
-    public long getBkId() {
+    public String getBkId() {
         return bkId;
     }
 
-    public void setBkId(long bkId) {
+    public void setBkId(String bkId) {
         this.bkId = bkId;
     }
 

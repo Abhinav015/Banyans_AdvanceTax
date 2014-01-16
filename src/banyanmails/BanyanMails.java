@@ -43,9 +43,9 @@ public class BanyanMails extends WindowAdapter {
         frm1.setLocation(350, 200);
         frm1.setSize(600, 280);
         frm1.setVisible(true);
-        frm1.setButtonDisbled();
         frm1.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         frm1.setData(sc.getFlDocTemp(), sc.getFlClients());
+        frm1.setButtonDisbled1();
         return frm1;
     }
 }
